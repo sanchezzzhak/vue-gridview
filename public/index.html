@@ -16,21 +16,67 @@
 
 
   document.addEventListener('DOMContentLoaded', function() {
-    DataGrid.mount(
+    GridView.mount(
         {
+          tableResponsive: true,
           id: 'app',
           theadSticky: true,
+          tableOptions: {
+            class: ['table-striped'],
+          },
           columns: [
             {
               key: 'id',
-              type: DataGrid.TYPE_NUMERIC,
+              type: GridView.TYPE_NUMERIC,
               label: 'ID',
             },
             {
-              type: DataGrid.TYPE_TEXT_SHORT,
+              type: GridView.TYPE_TEXT_SHORT,
               key: 'name',
               label: 'Name',
             },
+            {
+              type: GridView.TYPE_TEXT_SHORT,
+              key: 'phoneNumber',
+              label: 'Phone',
+            },
+            {
+              type: GridView.TYPE_TEXT_SHORT,
+              key: 'email',
+              label: 'Email',
+            },
+          ],
+          data: [
+            {id: 1, name: 'John', email: 'john@example.com', phoneNumber: '(353) 01 222 3333'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 3, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 52, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 25, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 42, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 28, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 552, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 552, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 5552, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 55552, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 7772, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 872, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 782, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 772, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
+            {id: 2, name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444'},
           ],
         });
   });

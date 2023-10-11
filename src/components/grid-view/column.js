@@ -5,11 +5,13 @@ export default class Column
    #key;
    #type;
    #label;
+   #index;
 
-   constructor(config) {
+   constructor(config, index) {
       this.#key = config.key;
       this.#type = config.type;
       this.#label = config.label;
+      this.#index = index;
    }
 
    label() {
@@ -20,7 +22,15 @@ export default class Column
       return this.#type;
    }
 
+   index() {
+    return this.#index;
+   }
+
    key() {
       return this.#key;
+   }
+
+   render(row) {
+      return row[this.key()] ?? '';
    }
 }
