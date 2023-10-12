@@ -1,2 +1,2 @@
-import {GridView} from './components/grid-view/index.js';
+import {GridView} from './components/grid-view';
 export {GridView}

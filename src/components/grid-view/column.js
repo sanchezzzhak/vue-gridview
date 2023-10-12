@@ -7,6 +7,9 @@ export default class Column
    #label;
    #index;
 
+   sortable;
+   sortType = 'none'
+
    constructor(config, index) {
       this.#key = config.key;
       this.#type = config.type;

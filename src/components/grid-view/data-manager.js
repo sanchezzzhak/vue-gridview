@@ -7,7 +7,7 @@ export default class DataManager
   #data = [];
 
   constructor(columns = [], data = []) {
-    this.#initColumns(columns);
+    this.#initColumns(columns.value);
     this.#initData(data);
   }
 

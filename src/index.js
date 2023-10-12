@@ -1,4 +1,4 @@
-import GridView from './components/GridView';
-import HighlightSearch from './components/GridView';
+import GridView from './components/GridView.vue';
+import SmartSearch from './components/SmartSearch.vue';
 
-export {GridView, HighlightSearch}
+export {GridView, SmartSearch}

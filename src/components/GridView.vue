@@ -1,6 +1,6 @@
 <script setup>
 
-import {defineProps} from 'vue';
+import {defineProps, toRefs} from 'vue';
 import DataManager from './grid-view/data-manager';
 
 const props = defineProps([
@@ -17,7 +17,6 @@ const props = defineProps([
   'data',
 ]);
 
-
 // const theme = props.config?.theme ?? 'bootstrap5';
 
 const getClasses = (list) => {
@@ -31,7 +30,7 @@ const getClasses = (list) => {
 const containerClasses = {
   'table-responsive': props.tableResponsive ?? false,
   'table-responsive-mobile': props.tableResponsiveMobile ?? false,
-  ...getClasses(props.options?.class ?? [])
+  ...getClasses(props.containerOptions?.class ?? [])
 };
 
 const tableClasses = {
@@ -44,10 +43,13 @@ const theadClasses = {
   ...getClasses(props.theadOptions?.class ?? [])
 };
 
-const dataManager = new DataManager(props.columns ?? [], props.data ?? []);
+const {data, columns} = toRefs(props);
+const dataManager = new DataManager(columns, data);
+
+
 </script>
 
-<template >
+<template>
   <div :class="containerClasses">
     <table :class="tableClasses">
       <thead :class="theadClasses">
@@ -59,7 +61,13 @@ const dataManager = new DataManager(props.columns ?? [], props.data ?? []);
             :data-index="column.index()"
             :data-type="column.type()"
             scope="col"
-        >{{ column.label() }} <span v-if="props.resizeColumn ?? false" class="resize-handle"></span>
+            :class="[{
+                sortable: column.sortable,
+                'none': column.sortable && column.sortType === 'none',
+                'desc': column.sortable && column.sortType === 'desc',
+                'asc': column.sortable && column.sortType === 'asc',
+            }]"
+        >{{ column.label() }} <span v-if="resizeColumn ?? false" class="resize-handle"></span>
         </th>
       </tr>
       </thead>
@@ -111,7 +119,6 @@ const dataManager = new DataManager(props.columns ?? [], props.data ?? []);
   .table-responsive-mobile  table tr {
     border-bottom: 3px solid #ddd;
     display: block;
-    margin-bottom: .625em;
   }
 
   .table-responsive-mobile table td {
