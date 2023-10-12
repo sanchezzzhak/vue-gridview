@@ -1,5 +1,5 @@
 import {createApp} from 'vue';
-import Component from '../components/GridView.vue';
+import Component from '../../components/GridView.vue';
 
 export class GridView {
 
