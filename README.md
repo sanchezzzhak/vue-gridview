@@ -1,24 +1,21 @@
 # vue-gridview
 
-## Project setup
+## Project setup dev
 ```
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn serve-run
 ```
 
-### Compiles and minifies for production
+### Compiles to dist
 ```
 yarn build
 ```
 
 ### Lints and fixes files
 ```
-yarn lint
+yarn serve-lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve-run": "vue-cli-service serve -c vue.config.cjs",
+    "serve-run": "vue-cli-service serve",
     "serve-lint": "vue-cli-service lint",
     "build": "node vite.build.mjs"
   },

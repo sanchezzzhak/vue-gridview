@@ -1,0 +1,8 @@
+./vite.build.mjs
+./vue.config.cjs
+./package.json
+./jsconfig.json
+./babel.config.js
+/public
+/src/lib.js
+/src/main.js

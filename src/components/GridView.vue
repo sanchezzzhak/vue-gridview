@@ -6,6 +6,7 @@ import DataManager from './grid-view/data-manager';
 const props = defineProps([
   'id',
   'tableResponsive',
+  'tableResponsiveMobile',
   'theadSticky',
   'resizeColumn',
 
@@ -29,6 +30,7 @@ const getClasses = (list) => {
 
 const containerClasses = {
   'table-responsive': props.tableResponsive ?? false,
+  'table-responsive-mobile': props.tableResponsiveMobile ?? false,
   ...getClasses(props.options?.class ?? [])
 };
 
@@ -76,13 +78,6 @@ const dataManager = new DataManager(props.columns ?? [], props.data ?? []);
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 
 .thead-sticky th {
   position: sticky;
@@ -102,7 +97,7 @@ const dataManager = new DataManager(props.columns ?? [], props.data ?? []);
     font-size: 1.3em;
   }
 
-  table thead {
+  .table-responsive-mobile table thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -113,27 +108,27 @@ const dataManager = new DataManager(props.columns ?? [], props.data ?? []);
     width: 1px;
   }
 
-  table tr {
+  .table-responsive-mobile  table tr {
     border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: .625em;
   }
 
-  table td {
+  .table-responsive-mobile table td {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
     text-align: right;
   }
 
-  table td::before {
+  .table-responsive-mobile table td::before {
     content: attr(data-label);
     float: left;
     font-weight: bold;
     text-transform: uppercase;
   }
 
-  table td:last-child {
+  .table-responsive-mobile table td:last-child {
     border-bottom: 0;
   }
 }
