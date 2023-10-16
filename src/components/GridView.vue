@@ -1,6 +1,6 @@
 <script setup>
 
-import {defineProps, reactive, computed} from 'vue';
+import {defineProps, reactive, computed, ref} from 'vue';
 
 const props = defineProps([
   'id',
@@ -15,8 +15,10 @@ const props = defineProps([
   'data',
   'page',
   'pageSize',
-  'pageTotal',
+  'pageTotal'
 ]);
+
+let isLoading = ref(false);
 
 const getClasses = (list) => {
   let result = {};
@@ -54,8 +56,24 @@ const table = reactive({
 const setting = reactive({
   order: null,
   pagination: {
-    page: props.page,
-    size: props.pageSize,
+    page: props.page || 1,
+    size: props.pageSize || 25,
+    pages: computed(()=> {
+      let currentPage = setting.pagination.page;
+      let maxPage = setting.pagination.max;
+      let startPage = currentPage - 2 <= 0 ? 1 : currentPage - 2;
+      if (maxPage - currentPage <= 2) {
+        startPage = maxPage - 4;
+      }
+      startPage = startPage <= 0 ? 1 : startPage;
+      const pages = [];
+      for (let i = startPage, l = maxPage; i <= l; i++) {
+        if (pages.length < 5) {
+          pages.push(i);
+        }
+      }
+      return pages;
+    }),
     max: computed(() => {
       if (props.pageTotal <= 0) {
         return 0;
@@ -108,9 +126,10 @@ const rows = computed(() => {
     }
   });
 
-  return sorts.length > 0
+  rows =  sorts.length > 0
       ? rows.sort(sortBy(sorts))
       : rows;
+  return rows;
 });
 
 
@@ -135,18 +154,13 @@ function onClickSort(column){
   if (!column.sortable) {
     return;
   }
-
   const sorts = {
     'none' : 'asc',
     'asc': 'desc',
     'desc': 'none'
   };
   column.sortType = sorts[column.sortType] ?? 'none';
-
-
 }
-
-
 </script>
 
 <template>
@@ -171,7 +185,7 @@ function onClickSort(column){
             }]"
             :data-sort-dir="columnSortType(column)"
         >
-          <a @click.prevent="onClickSort(column)">{{ columnLabel(column) }}</a>
+          <a @click.stop="onClickSort(column)">{{ columnLabel(column) }}</a>
           <span v-if="resizeColumn ?? false" class="resize-handle"></span>
         </th>
       </tr>
@@ -188,10 +202,53 @@ function onClickSort(column){
       </tr>
       </tbody>
     </table>
+
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item" :class="{ disabled: setting.pagination.page <= 1 }">
+          <a class="page-link" href="#" aria-label="Previous" @click.prevent="setting.pagination.page = 1">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">First</span>
+          </a>
+        </li>
+        <li
+            v-for="n in setting.pagination.pages"
+            :key="n"
+            :class="{ disabled: setting.pagination.page === n }"
+            class="page-item"><a class="page-link" href="#">{{ n }}</a></li>
+
+        <li class="page-item"
+            :class="{ disabled: setting.pagination.page >= setting.pagination.max }">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Last</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
   </div>
 </template>
 
 <style>
+
+.gridview-loading-mask {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-flow: column;
+  transition: opacity 0.3s ease;
+}
+
+th a {
+  cursor: pointer;
+}
+
 th[data-sort-dir="desc"].sortable:after {
   content: "\25bc";
   font-size: 0.7em;
